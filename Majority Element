@@ -1,0 +1,29 @@
+class Solution{
+  public:
+     
+    int majorityElement(int a[], int n)
+    {
+     
+        int ele;
+        int cnt=0;
+      for(int i=0;i<n;i++){
+          if(cnt==0){
+              cnt=1;
+              ele=a[i];
+          }
+          else if(a[i]==ele){
+              cnt++;
+          }
+          else if(a[i]!=ele){
+             cnt--; 
+          }
+      }
+      for(int i=0;i<n;i++){
+          if(a[i]==ele){
+              cnt++;
+          }
+      }
+      return cnt>n/2?ele:-1;
+        
+    }
+};
