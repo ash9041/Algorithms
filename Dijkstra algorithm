@@ -1,0 +1,27 @@
+void dijkstra(int source, const vector<vector<pair<int, int>>>& graph, vector<int>& distances) {
+    int n = graph.size();
+    distances.assign(n, INF);
+    distances[source] = 0;
+
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
+    pq.push({0, source});
+
+    while (!pq.empty()) {
+        int dist = pq.top().first;
+        int u = pq.top().second;
+        pq.pop();
+
+        if (dist > distances[u])
+            continue;
+
+        for (const auto& edge : graph[u]) {
+            int v = edge.first;
+            int weight = edge.second;
+
+            if (distances[u] + weight < distances[v]) {
+                distances[v] = distances[u] + weight;
+                pq.push({distances[v], v});
+            }
+        }
+    }
+}
